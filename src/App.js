@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
-  
+  /*
     state = {
       persons: [
         { name: 'Francisco', age: 22},
@@ -36,6 +38,35 @@ class App extends Component {
       });
     };
 
+    */
+
+    state = {
+      numeros: [
+        {name: 'numero 1'},
+        {name: 'numero 2'}
+      ],
+      otherState: 'Otro valor'
+    };
+
+    nameChangeHandler = (event) => {
+      this.setState ({
+        numeros: [
+          {name: event.target.value},
+          {name: event.target.value}
+        ],
+        otherState: 'Otro valor'
+      });
+    };
+
+    switchNameHandler = (event) => {
+      this.setState ({
+        numeros: [
+          { name: 'numero 1 cambiado por botón'},
+          { name: 'numero 2 cambiado por botón'}
+        ]
+      });
+    };
+
     render() {
 
       const style = {
@@ -48,6 +79,7 @@ class App extends Component {
 
       return (
         <div className="App">
+          {/*
           <h1>Aplicación REACT</h1>
           <button 
             style={style}
@@ -63,6 +95,13 @@ class App extends Component {
           <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}></Person>
+          */}
+          <button
+            style={style}
+            onClick={this.switchNameHandler} >Cambiar</button>
+          <UserInput changed={this.nameChangeHandler} currentName={this.state.numeros[0].name}></UserInput>
+          <UserOutput name={this.state.numeros[0].name} ></UserOutput>
+          <UserOutput name={this.state.numeros[1].name}></UserOutput>
         </div>
       );
 // return React.createElement('div', {className: 'App'}, React.createElement('h1', null));
